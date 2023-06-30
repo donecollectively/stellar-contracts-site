@@ -38,11 +38,12 @@ jobs:
           echo "command=install" >> $GITHUB_OUTPUT
           echo "runner=pnpm" >> $GITHUB_OUTPUT
           exit 0
+
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: "18"
-          cache: ${{ steps.detect-package-manager.outputs.manager }}
+          #cache: ${{ steps.detect-package-manager.outputs.manager }}
       - name: Setup Pages
         uses: actions/configure-pages@v3
         #with:
@@ -51,6 +52,8 @@ jobs:
           #
           # You may remove this line if you want to manage the configuration yourself.
           # static_site_generator: next
+      - name: Install PNPM
+        run: npm i -g pnpm      
       - name: Restore cache
         uses: actions/cache@v3
         with:
