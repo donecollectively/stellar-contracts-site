@@ -53,7 +53,7 @@ jobs:
           # You may remove this line if you want to manage the configuration yourself.
           # static_site_generator: next
       - name: Install PNPM
-        run: npm i -g pnpm      
+        run: npm i -g pnpm@7.29     
       - name: Restore cache
         uses: actions/cache@v3
         with:
