@@ -36,12 +36,12 @@ Profits ("surplus", in the parlance) will be allocated between these classes, an
 
 Our allocation plan for **surplus from recurring revenue** for these classes will be subject to a governance process, but is currently slated to cap out at 30% for capital-and-capacity contributors and 50% for long-term-value contributors, with 10% allocated for distribution to short-term operations staff and 10% retained in the operations treasury.  
 
-**Surplus allocation from short-term revenue** actvities such as consulting and training is slated for an inverted surplus allocation, with 75% to short-term operations contributors, 5% to capital contributors, 10% to long-term-value contributors, and 10% for retention in the operations treasury.
+**Surplus allocation from short-term revenue** activities such as consulting and training is slated for an inverted surplus allocation, with 75% to short-term operations contributors, 5% to capital contributors, 10% to long-term-value contributors, and 10% for retention in the operations treasury.
 
 {% callout %}
-    Services-for-pay (aka _short-term revenue_) always include direct compensation to contributors who are enabling those services.  These are "cost-to-serve", paid before "gross profits" are computed.
-
     All short-term service-contributors participate in surplus allocation from short-term revenue, regardless of whether they contributed to a specific program that creates short-term revenue.
+
+    Services-for-pay (aka _short-term revenue_) always include direct compensation to contributors who are enabling those services.  These are "cost-to-serve", paid at a fair market rate before "gross profits" are computed.
 {% /callout %}
 
 {% callout icon="📊" iconSize="180%" %}

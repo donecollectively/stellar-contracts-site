@@ -14,7 +14,7 @@ Qipu were some of the world's first physical devices for accounting.  The abacus
 
 The fundamentals of on-chain accounting include categories and details for all kinds of assets, money received or paid, for money that is owed (receivables) or owing (payables), and for income and expenses.  
 
-Also, the standards-conforming structures of on-chain activity for setup (i.e. category-creation / chart-of-accounts maintenance), and the essential records of accounting transactions. 
+Those fundamentals should include the standards-conformant structures of on-chain activity for setup (i.e. category-creation / chart-of-accounts maintenance), and the essential records of accounting transactions. 
 
 With solid baseline data on the state of finance in an organization, many kinds of reports can provide insight and knowledge about that organization and its operations.
 
@@ -34,7 +34,7 @@ We're extending contribution-accounting to cover a more complete set of financia
 
 ### Developing ready-to-use accounting automation for Cardano.
 
-We're working with organizations and individuals in the Cardano community with knowledge and needs around accounting.  We're developing data schemas for all kinds of transactions beyond contributor expenses.
+We're working with organizations and individuals in the Cardano community with both knowledge and needs around accounting.  We're developing data schemas for all kinds of transactions beyond contributor expenses.
 
 In this proposal, we'll develop metadata standards with community consent, with CIP documents and community workshops, for a set of ***on-chain open accounting standards***.  
 
@@ -46,17 +46,17 @@ Open standards make a bunch of things easier.  Let's do it together.
 
 Some of our member organizations will also be developing various UI's interfacing into some of these same accounting contracts, each serving particular segments in ways unique for their applications.
 
-**We'd like to sponsor an additional 5 community organizations** with consultations on accounting essentials within their dApps and organizations, with 75% of their fees paid from the Catalyst treasury.  
+**We'd are sponsoring an additional 5 community organizations** with consultations on accounting essentials within their dApps and organizations, with 75% of their fees paid from the Catalyst treasury.  
 
-We are seeking for those orgs to pay directly the remaining 25%, as an incentive mechanism to help ensure the organization's engagement in the process.
+We are asking those orgs to pay directly the remaining 25%, as an incentive mechanism to help ensure the organization's engagement in the process.
 
 ### Project Sustainability
 
-We are leaving open for the decision of the Stellar Product Cooperative how to ensure a treasury for the Stellar Accounting product.  
+We are leaving an open choice within the Stellar Product Cooperative on approaches to ensure a treasury for the Stellar Accounting product.  That might include a subscription model, transaction-fees connected to a limited subset of transaction-types, or with value-added services plugging into the basic accounting code.
 
 ### How does it work?
 
-Our engineering approach for accounting on Cardano is centered on the use of tokens and contract `Datum` (not transaction metadata, because on-chain contracts can't access them).  
+Our engineering approach for accounting on Cardano is centered on the use of tokens and contract `Datum` (not transaction metadata, because on-chain contracts can't access transactions metadata).  
 
 At the application level, we will plan to leverage the patterns and infrastructure of Stellar Contracts, in which the low-level mechanisms of transaction-building are reframed as ***APIs that application developers and end-users would recognize as being closely related to the application domain***.  Within each of those meaningful APIs would be found some of the low-level transaction-building details.
 
@@ -66,7 +66,7 @@ As a result, the basic Accounting APIs should be recognizably for accounting pur
   * `txnAddExpenseCategory(mustFindExpenseCategoryUtxo("consulting, technical"), txnAmount)`
   * `mustFindAccountsReceivableAuthorityUtxo()`
   
-  These receivable-related calls are a small sample based on our existing experience working with accounting systems - and, in a couple of cases, building them.
+  These receivable-related calls are a small sample based on our existing technical experience in accounting systems.
 
 ## How you can help
 

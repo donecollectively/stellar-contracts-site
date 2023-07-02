@@ -72,9 +72,9 @@ Our number one piece of advice for contract developers is to make a daily practi
 
 #### Use the patterns
 
-It might seem obvious, but it's also pretty easy to forget about the usefulness of composability and delegates.
+It might seem obvious, but it's also pretty easy to forget about the usefulness of composability and delegates.  Practicing use of the patterns helps - a bunch!
 
-The more we can think of multiple, granular scripts as simply ***lightweight, modular elements of a single and integrated whole***, the easier it can be to add value to our dApps through modules instead of growing a monolithic contract script.
+_The more we can think of multiple, granular scripts as simply **lightweight, modular elements of a single and integrated whole**, the easier it can be to add value to our dApps through modules instead of growing a monolithic contract script._
 
 ### Practice different ways of delegating
 
@@ -84,7 +84,7 @@ Delegate UUTs can be used in a few different ways.  You can allow UUTs to be tra
 
 Construct helper functions that can easily be mocked out for testing purposes, producing a transaction that fails in an expected way.
 
-Such an expected failure (aka a **negative test**) demonstrates, as an explicit part of the automated test plan, the importance of the item missing from a txn - such as a UUT that is needed in a certain situation.
+Such an expected failure (aka a **negative test**) demonstrates the importance of the item missing from a txn - such as a UUT that is needed in a certain situation.  Putting it explicit in the automated test plan actively guards your codebase from changes that would produce the wrong result.
 
 ### Habitually test-drive new contract code
 
@@ -96,6 +96,12 @@ Follow these sequences to build tests and make new contract functionality:
   * Make the test pass
   * Run your full test-suite again and correct any problems found
 
-This is more a process than a principle, but it turns out that being test-oriented will also affect the design of your contract components - mockable transaction-helpers aren't just good for tests.  They're great for design and tend to improve clarity of your (non-test) code.
+This is more a process than a principle.  Practice it to get more familiar, then to get fluent, then fast and confident.  You're going to go far!
+
+{% callout %} 
+     Doing these practices will improve the design of your contract components.
+     
+     Mockable transaction-helpers aren't just good for tests.  They tend to improve code clarity and quality too.
+{% /callout %} 
 
 A full automated test suite also serves auditing and certification process.

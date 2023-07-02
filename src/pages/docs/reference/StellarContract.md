@@ -8,19 +8,15 @@ The StellarContract class is a Typescript module providing a facade for both on-
 ---
 {% quick-links %}
 
-{%callout type="stellar" title="Constellation?" %}
-_Tiny points of light_ {%br /%}
-_coming together_{%br /%}
-_in a delicate dance_
-
-**Read more below**
-{%/callout%}
-
-{% quick-link title="Getting Started: Installing" icon="installation" href="/docs/starting/installation" description="How to start using Stellar Contracts today" /%}
-
 {% quick-link title="Architecture guide" icon="presets" href="/docs/reference/architecture-guide" description="Designing with granular contract scripts to build richer on-chain capabilites with less code" /%}
 
+{% quick-link title="Getting Started: Installing" icon="installation" href="/docs/starting/installation" description="How to start using Stellar Contracts today" /%}
 {% /quick-links %}
+{%callout type="stellar" title="A Constellation" %}
+_Tiny points of light_ {%br /%}
+_drawn together, silver threads_{%br /%}
+_An elegant dance_
+{%/callout%}
 
 
 
@@ -144,8 +140,6 @@ _For a consultation with us about your requirements, [join us on Discord](https:
 
 Because creating UUTs for connected delegates is so important, we made a minter always available for use in your contract constellation.
 
-In the next example, we use the Helios API and a few helpers from Stellar to make a complete transaction.  It includes a minted UUT.
-
 {% callout title="Minting a UUT for a new Delegate" %}
 
 A UUT can be created based on any unique input:
@@ -157,6 +151,13 @@ A UUT can be created based on any unique input:
 {% /callout %}
 
 In this pattern, we use a convention: the identity of a UTxO being spent will always give us a uniqueness guarantee for the new UUT.  Any input will do fine - even spare change, if your contract creation doesn't need any significant value deposited.
+
+It's possible to override the simple default minter and use it for more than just UUTs.  
+
+
+In the next example, we use the Helios API and a few helpers from Stellar to make a complete transaction.  It includes a minted UUT.
+
+
 
 ### Building an entire Txn with a delegation helper and UUT
 
@@ -171,44 +172,46 @@ async mkTxnCreateEscrow(
     const utxin = await this.mustFindValueInWallet(escrowAmount);
     tcx.addInputs(utxIn);
     firstUtxo = utxin[0];
-    const escrowId = this.mkUUTfromSeed(firstUtxo, "policy");
-    const escrowConfig = this.mkDatumEscrowInstance(uut, this.getEscrowPolicy().address);
+    const escrowIdUUT = this.mkUUTfromSeed(firstUtxo, "policy");
 
-    // invoke a delegate, wiring them into the Capo contract via the UUT
-    this.getEscrowPolicy().txnNewEscrowInstance(tcx, uut, this.address);
-    //  -> the UUT goes to the delegate
+    const escrowPolicy = this.getEscrowPolicy(); // delegate address
 
-    //  ...  and a reference to that UUT is stored in the local contract, with an
-    //        "EscrowInstance" Datum.
+    // 👁️ invoke a delegate, wiring them into the Capo contract via the UUT
+    escrowPolicy.txnNewEscrowInstance(tcx, escrowIdUUT, this.address);
+    // 👉  UUT is sent into the delegate here  ☝️
+
+    //  A reference to that UUT is included in the escrow-config,
+    //  ... using the EscrowInstance Datum   👇
+    const escrowConfig = this.mkDatumEscrowInstance(
+        escrowIdUUT, escrowPolicy.address);
+
+    // Finally, the escrow amount is stored in the escrow contract, 
+    // with the those config details.
     tcx.addOutput(
         this.address, 
-        this.mkValueRef(uut), 
-        escrowConfig
+        escrowAmount,  // 👈
+        escrowConfig  //👈
     )
     return this.tcx;
 }
 ```
 In this transaction factory, note:
 
-  * A UUT is created for the escrow instance
-  * A related EscrowPolicy contract receives the UUT
-  * A Datum (an EscrowInstance) is included in the contract 
+  * A UUT is created for the escrow instance  (`mkUUTfromSeed`)
+  * A related EscrowPolicy contract receives the UUT (`txnNewEscrowInstance`)
+  * A Datum (of type EscrowInstance) is included in the contract  (`escrowConfig`)
   * The EscrowInstance has a reference to the UUT and the address of the escrow policy script
 
 
 {% callout title="TODO before broad distribution" %}
 TODO: finish implementing mkUutFromSeed based on existing 'charter' pattern
-
-TODO: implement mkValueRef() for simple convertion from uut to the right Value type
 {% /callout %}
-
-You can override the default minter and use it for more than just UUTs.
 
 
 ## Footnote: Importing Helios source
 
 {% callout title="Hint: Importing Helios on-chain source code" %}
-    Use the rollup `string` plugin with vite / vitest if you have trouble with the `import contract ...` line
+    Use the rollup `string` plugin with vite, vitest, or rollup if you have trouble with the `import contract ...` line
 
 ```js
 // vite.config.js

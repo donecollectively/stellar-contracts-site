@@ -33,13 +33,24 @@ Sometimes called a Thread token, a UUT has technical similarity to the mechanism
 
 {% quick-links %}
 
-{% quick-link title="Capo mints a UUT" icon="presets" href="" description="...delegates authority and includes the delegate in related txns" /%}
+{% callout title="Capo mints a UUT" %}
+    ...delegates authority and includes the delegate in related txns
+{% /callout %}
 
-{% quick-link title="Delegate holds the UUT" icon="plugins" href="" description="Enforces its policy when the UUT is used in a txn" /%}
+{% callout title="Delegate holds UUT" icon="🪙" iconSize="180%" href="" %}
+    ... enforcing its policy when the UUT is used in a txn 
+{% /callout %}
+
 {% /quick-links %}
 
 
 **UUTs link separate scripts**, enabling an implicit collaboration between them.  They can easily combine with inline Datum elements as configuration details affecting the collaboration.
+
+{% callout title="UUT's home and lifetime" %}
+  A UUT should typically last as long as its delegate, and be stored in that delegate's validator script address.  
+  
+  When a delegate is no longer needed, the UUT can be retired, burning it so that it no longer exists in any UTxO.
+{% /callout %}
 
 ### Pattern 2: the Activity
 
@@ -49,7 +60,7 @@ You can use Redeemer data of the right type to provide more specificity around e
 
 In transactions involving multiple collaborating scripts, the Activites (and their redeemers) from each contributing script are combined: 
 
-  * Initiate a `mkTxnCreateFundingProposal` transaction
+  * Initiate a `mkTxnCreateFundingProposal` transaction,
   * ... include a `mintingProjectOwnerToken` activity, 
   * ... and add a `provingMembership` activity 
   
@@ -65,11 +76,19 @@ Pairing it with a minting script can give you an easy source of creating UUTs to
 
 ### Pattern 4: the Delegate
 
-A delegate contract plugs into a leader contract; the leader retains a configured reference in a UTxO it owns; and sends a UUT delegate to another contract.  
+{% callout %}
+A delegate contract plugs into a leader contract using a UUT stored at the delegate's script-address.
 
-UUT delegates can have broad independent authority or be tightly constrained.  They can be sent to contracts, sent to people, traded to other contracts ...
+The leader remembers the details, in a UTxO owned by the leader; the details point at that delegate address and the UUT, creating a firm linkage between the contracts.
 
-... or be narrowly scoped, tying them to specific accounts or contracts and denying their authority unless it's used in prescribed ways.  **As a contract designer, you can choose variations on the theme** and get the results you need.
+_The delegate serves a role for the leader/Capo, allowing responsibilities to be divided._
+{% /callout %}
+
+UUT-linked delegates can have broad independent authority or be tightly constrained.  They can be sent to contracts, sent to people, traded to other contracts ...
+
+... or be narrowly scoped, tying them to specific accounts or contracts.  The **delegate can then approve transactions, when they're done in proper & prescribed ways** (or, reject them, otherwise).
+
+As a contract designer, you can also choose variations on the theme to get the results you need.
 
 ### Pattern 5: Off-chain collaboration and partial transactions
 
@@ -81,7 +100,10 @@ With a constellation of on-chain contract scripts comes a corresponding constell
 
 In this seed of a humorous tale, there is also intuition to be found about collaborating smart-contract components.
 
-#### An example constellation of collaborating scripts:
+#### An example constellation of collaborating scripts
+
+This example might serve as part of a project-management system:
+
 {% quick-links %}
 
 {% callout title="Capo"  href=""%}
@@ -93,7 +115,7 @@ In this seed of a humorous tale, there is also intuition to be found about colla
 {% /callout %}
 
 {% callout icon="🪙" iconSize="180%" title="Profit-sharing"  %}
-... routes a portion of transaction value to your treasury
+... routes a portion of transaction value to your treasury and to contributors
 {% /callout %}
 
 {% callout icon="📔" iconSize="180%" title="Process state-machine"%}
@@ -108,20 +130,27 @@ A leader contract's transaction-builder for a given activity typically triggers 
 
   * checking known on-chain addresses to ***find certain tokens, values, and UUTs***
   * ***starting a transaction***, or joining one already in progress
-  * contributing a value, or a token or ***UUT into a contract***, and computing correct values.
+  * contributing a value, or a token or ***UUT into a transaction***, computing correct values, and ensuring the right contract-scripts are triggered
     - these can call into "on-chain" Helios code to ensure key business logic has a single point of origination
   * ***returning a UUT*** to its point of origin so it can be used next time
   * failing to build a transaction if the current user doesn't have access to the key inputs for the needed transaction
 
 #### Every involved contract script can contribute elements such as these
 
-... in ways people find needful for their transactions.  A **transaction context** ***provides a fluent container*** and integrates partial-transactions contributed by separate scripts in a constellation. 
+... in ways people find needful for their transactions.  A **transaction context** ***provides a fluent container*** for transaction-building, and it integrates partial-transactions contributed by separate scripts in a constellation. 
 
 This **collaboration and composition** pattern enables sets of contracts (their off-chain aspects) to start, embellish, augment and delegate transaction-building policy.  Together, ***they form the transactions  needed for your dApp to make progress and fulfill its purpose***.
 
 #### Collaborative on-chain validation
 
 In the same way collaborating off-chain components work together, their on-chain parts also collaborate, each validating their important parts and guarding against wrongly-built transactions.
+
+{% callout title="on-chain vs off-chain" %}
+    Off-chain dApp code makes the transactions people want.
+
+    On-chain contract scripts guard against txns people DON'T WANT.
+{% /callout %}
+
 
 #### Results
 
@@ -135,7 +164,9 @@ Contracts built with this pattern are simpler, easier to review, more auditable,
 
 Meanwhile, each collaborator in a constellation can have its own automated tests proving it does well all the right behavior it needs to be of good service, and none bad.
 
+{% callout %}
                 _Test early, test often_
+{% /callout %}
 
 Our HeliosTestingContext provides some useful elements and suggests some context-specific patterns to make test-automation easier and more reliable.
 

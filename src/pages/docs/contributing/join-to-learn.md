@@ -13,14 +13,21 @@ _All enrollees will receive membership in the Stellar Product Cooperative, and s
 
 ## How it works
 
-Each week, we'll join together live with participants from eastern and western hemispheres.  Each session is expected to run 90 minutes, and you'll have space to continue discussions together.
+Each week, we'll join together with you live in US/West mornings (afternoon, European time).  Each session is expected to run 90 minutes, and you'll have space to continue discussions together.
 
 Each session will come with an experiential-learning activity.
 
 You'll get both direct and vicarous co-experiences and build intuition and understanding.
 
-### Who should join?
+{% callout %}
+    When enrollment exceeds 50 members, we will add extra sessions to cover more timezones with live classes.
 
+    Want to participate asynchronously?  We'll provide access to recordings, for exclusive access to enrolled members.
+{% /callout %}
+
+
+
+### Who should join?
 
 Are you a coder?  Although ***you aren't required to write any code during our program***, you'll have the opportunity to engage more deeply into the practical technical details.  _We hope to also be announcing available certifications for program graduates_, as well.
 
@@ -50,7 +57,7 @@ We'll inventory the key "moving parts" of Cardano smart contracts, that apply re
 
 We'll show different ways that commercial application systems can be constructed, and ways the on-chain mechanisms work - and some cases where they don't work in ways we might intuitively guess.  And we'll survey a few off-chain technologies that can help serve your product goals.  
 
-For your learn-by-doing activity, you'll choose an application domain and work on shaping some of its key interactions using the building-blocks you've learned.
+For your learn-by-doing activity, you'll choose an application domain and work on shaping some of its key interactions using the building-blocks you've learned.  We'll additionally offer a range of sample applications where you can practice solutioning and get prompt feedback.
 
 #### Week 2: the shape of a Stellar contract
 
