@@ -49,7 +49,7 @@ export function Callout({ type = 'note', iconSize:fontSize, icon, title, childre
   let iconElement = icon || <IconComponent className="h-8 w-8 flex-none" />
   if(fontSize) iconElement = <span style={{fontSize}}>{icon}</span>;
   return (
-    <div className={clsx('my-8 flex rounded-3xl p-6', styles[type].container)}>
+    <div className={clsx('callout my-8 flex rounded-3xl p-6', styles[type].container)}>
       {iconElement}
       <div className="ml-4 flex-auto">
         <p className={clsx('m-0 font-display text-xl', styles[type].title)}>
