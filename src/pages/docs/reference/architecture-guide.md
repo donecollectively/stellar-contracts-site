@@ -61,8 +61,8 @@ You can use Redeemer data of the right type to provide more specificity around e
 In transactions involving multiple collaborating scripts, the Activites (and their redeemers) from each contributing script are combined: 
 
   * Initiate a `mkTxnCreateFundingProposal` transaction,
-  * ... include a `mintingProjectOwnerToken` activity, 
-  * ... and add a `provingMembership` activity 
+  * ... add a `provingMembership` activity needed for such a proposal,
+  * ... and include a `mintingProjectOwnerToken` activity - which does just what its name suggests
   
 Through composition and collaboration, three different contract scripts each do small parts and ***get things done together***.
 
@@ -72,7 +72,7 @@ Our naming guidelines give designers and developers a clear, **intuitive convent
 
 A leader contract that might itself do very little beyond being a **hub for coordinating between other contracts** under its umbrella of responsibility, as you've defined it for your application.  Its off-chain part might contain a number of `mkTxn...` entry-points to serve user-stories from your product requirements.
 
-Pairing it with a minting script can give you an easy source of creating UUTs to use in delegation patterns.
+It comes by default with a minting script,  giving you an easy source for creating UUTs to use in delegation patterns.  
 
 ### Pattern 4: the Delegate
 
@@ -84,17 +84,22 @@ The leader remembers the details, in a UTxO owned by the leader; the details poi
 _The delegate serves a role for the leader/Capo, allowing responsibilities to be divided._
 {% /callout %}
 
-UUT-linked delegates can have broad independent authority or be tightly constrained.  They can be sent to contracts, sent to people, traded to other contracts ...
+ As a dApp architect, you can allow UUTs to be sent to people or traded to other contracts, thus given them broad and independent authority.
 
-... or be narrowly scoped, tying them to specific accounts or contracts.  The **delegate can then approve transactions, when they're done in proper & prescribed ways** (or, reject them, otherwise).
+Or, you can require they be narrowly constrained, tying them to specific accounts or contracts.  The **delegate can then approve transactions, when they're done in proper and prescribed ways** (or, reject them, otherwise).
 
-As a contract designer, you can also choose variations on the theme to get the results you need.
+You get freedom to construct variations on the theme to get the results you need.
 
 ### Pattern 5: Off-chain collaboration and partial transactions
 
 Off-chain dApps, with or without a corresponding application back-end, have a key role to play in creation of the transactions needed to make progress on any kind of smart contracts.
 
-With a constellation of on-chain contract scripts comes a corresponding constellation of off-chain contract components.  Each one contributes pieces of transaction-building **responsibilities that combine to form a beautifully coordinated result**.  
+{% callout %}
+With a constellation of on-chain contract scripts comes a ***corresponding constellation of off-chain contract components***.  
+
+Each component contributes bits of transaction-building ***responsibilities that combine to form a beautifully coordinated result***.  
+{% /callout %}
+
 
 >                _...a plumber, an electrician, a carpenter and a rabbi walk into a bar..._
 
@@ -131,7 +136,7 @@ A leader contract's transaction-builder for a given activity typically triggers 
   * checking known on-chain addresses to ***find certain tokens, values, and UUTs***
   * ***starting a transaction***, or joining one already in progress
   * contributing a value, or a token or ***UUT into a transaction***, computing correct values, and ensuring the right contract-scripts are triggered
-    - these can call into "on-chain" Helios code to ensure key business logic has a single point of origination
+    - these off-chain functions can also call into "on-chain" Helios code, ensuring ***single-point-of-truth for key business logic*** 
   * ***returning a UUT*** to its point of origin so it can be used next time
   * failing to build a transaction if the current user doesn't have access to the key inputs for the needed transaction
 
@@ -148,15 +153,18 @@ In the same way collaborating off-chain components work together, their on-chain
 {% callout title="on-chain vs off-chain" %}
     Off-chain dApp code makes the transactions people want.
 
-    On-chain contract scripts guard against txns people DON'T WANT.
+    But people could build bogus transactions too.  
+    ***On-chain contract scripts guard against txns people DON'T WANT.***
 {% /callout %}
 
 
 #### Results
 
-Contracts built with this pattern are simpler, easier to review, more auditable, and more easily certified.  Their elements are flexible for great reusability and customization, and deliver ***safer, more predictable results***.
+Contracts built with the collaboration pattern are simpler, easier to review, more auditable, and more easily certified.  Their elements are flexible for great reusability and customization, and deliver ***safer, more predictable results***.
 
->   _so the rabbi says, 'Please, God, make sure the electrician isn't working on the same day as the plumber'_
+>   _so the rabbi raises his glass. 'Please, God, make sure the electrician isn't working on the same day as the plumber'_
+
+L’Chaim!
 
 ## More valuable patterns
 

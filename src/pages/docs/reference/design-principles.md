@@ -31,7 +31,7 @@ Names should carry intuition, simply from reading the name.  This example tells 
 }}>Receive your Collectible</button>
 ```
 
-Consistent naming conventions are also used inside a `mkTxn...` function, expressing this principle deeply throughout a dApp's code.
+***Consistent naming conventions*** are also used inside functions in your Stellar dApp,  like this `mkTxnReceiveNFT` example, to evoke clear purpose deeply throughout a dApp's code.
 
 {% callout %}
 _This approach makes application code very clear and "read/write" instead of "write-only"._
@@ -43,19 +43,6 @@ Another example that tells its own story about creating a type of Datum:
 ```js
 mkDatumNftTradingTerms({ platformCommission, resaleRoyalty, minimumBid })
 ```
-
-#### Naming conventions in Stellar
-
-  * **Activities** get active verbs like _`receivingNFT`_, _`mintingNamedToken`_, or _`suggestingCharterChange`_.  
-  * **mkTxn**XxYyy() methods start the creation of a transaction, and the purpose of that transaction is found in the rest of its name.
-  * **mkDatum**XxYyy() methods are used for generating specific types of Datum structures for use in on-chain transactions.  They can express ***configuration*** or ***state management***  semantics.
-  * **txn**XxYyy() aka "partials" - these methods add details to a transaction, when those details are not fit to stand as a separate txn.  Partials can't stand on their own; they enable or guard other transactions.  Great for collaborator contracts.
-  * **mustFind**XxxYy**Utxo**() methods are used for the pattern of finding some particular UTxO - often one with a particular UUT.  Frequently used in transaction-creation partials.
-
-{% callout %}
-_These five patterns cover most of the common interactions dApps can use at the bridge to their Helios contracts._
-{% /callout %}
-
 #### Programmers should always be able to code fluently
 
 When a developer is about to hook a "Send Payment" button up to the blockchain, the lines of code they write should be ***brief and clearly descriptive of purpose***.
@@ -63,6 +50,24 @@ When a developer is about to hook a "Send Payment" button up to the blockchain, 
 As they continue implementing different details of their apps and transactions, this trend should continue, with ***application-domain helper functions*** developers can fluently find and use.
 
 The patterns of naming convention provide strong hints to name things in ways that promote fluent coding.  A developer may not remember the full  name of a `mkDatum...` or `mustFind...` method, but autocomplete based on those conventions gives them great leverage.
+
+### Naming conventions in Stellar
+
+  * **Activities** get active verbs like _`receivingNFT`_, _`mintingNamedToken`_, or _`suggestingCharterChange`_.  
+  * **mkTxn**XxYyy() methods start the creation of a transaction, and the purpose of that transaction is found in the rest of its name.
+  * **mkDatum**XxYyy() methods are used for generating specific types of Datum structures for use in on-chain transactions.  They can express ***configuration*** or ***state management***  semantics.
+  * **mustFind**XxxYy**Utxo**() methods are used for the pattern of finding some particular UTxO - often one with a particular UUT.  Frequently used in transaction-creation partials.
+
+{% callout %}
+_These four patterns of **naming things** cover most of the common interactions dApps will have from UI code, at the bridge to their Helios contracts._
+
+{% /callout %}
+
+There are some additional naming conventions that are equally important, but may be seen less frequently wtihin UI code.  They pave they way for great architecture, collaboration between contract-scripts, flexibility and reusability.  
+
+  * **txn**XxYyy() aka "partials" - these methods add details to a transaction, when those details are not fit to stand as a separate txn.  Partials can't stand on their own; they enable or guard other transactions.  Great for collaborator contracts.
+  * **related**XxYyy() - these methods exist to express relationships to delegates (i.e. other on-chain/off-chain scripts). Functions using this pattern will likely include a call to `addScriptWithParams`, referencing a Stellar Contract subclass fitting the meaning found in the "XxYyy" part.
+
 
 ## How to Build Your Contracts
 

@@ -136,21 +136,31 @@ _For a consultation with us about your requirements, [join us on Discord](https:
     TODO @Piotr drop a Bonfire button in here 
 {% /callout %}
 
-#### Minting helper
+### Capo pattern and Minting helper
 
-Because creating UUTs for connected delegates is so important, we made a minter always available for use in your contract constellation.
+Because creating UUTs for connected delegates is such a valuable pattern, we provide a class that automatically includes a minter
+
+To use the UUT pattern, use the `Capo` class instead of inheriting from `StellarContract`:
 
 {% callout title="Minting a UUT for a new Delegate" %}
 
-A UUT can be created based on any unique input:
-
 ```js    
-    firstUtxo = txin[0];  
-    const uut = this.mkUUTFromSeed(firstUtxo, "policy");
+import {Capo, partialTxn} from "@donecollectively/stellar-contracts";
+
+class SomeEscrowContract extends Capo {
+    // ...
+
+    @partialTxn
+    txnCreateNewInstance(tcx: StellarTxnContext) {
+        const uut = this.mkUUT(tcx, "escrowPolicy");
+
+        tcx.addOutput(
+    }
+}
 ```
 {% /callout %}
 
-In this pattern, we use a convention: the identity of a UTxO being spent will always give us a uniqueness guarantee for the new UUT.  Any input will do fine - even spare change, if your contract creation doesn't need any significant value deposited.
+In this example, a new "escrowPolicy" token is being created.  The
 
 It's possible to override the simple default minter and use it for more than just UUTs.  
 
