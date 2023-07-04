@@ -13,7 +13,7 @@ _All enrollees will receive membership in the Stellar Product Cooperative, and s
 
 ## How it works
 
-Each week, we'll join together with you live in US/West mornings (afternoon, European time).  Each session is expected to run 90 minutes, and you'll have space to continue discussions together.
+Each week, we'll join together with you live in US/West mornings (afternoon / evening, European time).  Each session is expected to run 90 minutes, and you'll have space to continue discussions together.
 
 Each session will come with an experiential-learning activity.
 
