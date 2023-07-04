@@ -13,7 +13,7 @@ const code = `import script from './OurNFTProtocol.hl';
 
 export class OurNFTProtocol
 extends StellarContract<NftProtocolParams> {
-    static script=script;
+    contractSource() { return script; }
 
     mkTxnMintNFT() {
         ...
