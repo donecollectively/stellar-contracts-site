@@ -2,6 +2,7 @@
   "extends": ["next/core-web-vitals"],
   "rules": {
     "react/no-children-prop": "off",
+    "@next/next/no-script-tags-in-head-component": "off",
     "@next/next/next-script-for-ga": "off"
   }
 }
