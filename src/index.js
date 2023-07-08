@@ -28,7 +28,7 @@ export const navigation = [
       links: [
           { title: 'Community Coin', href: '/docs/product/coco' },
           { title: 'Stellar Vesting', href: '/docs/product/vesting'},
-          { title: 'Stellar Revshare (proposed)', href: '/docs/product/cardano-revshare' },
+          { title: 'Stellar Revshare (proposed)', href: '/docs/product/cardano-revenue-sharing' },
           { title: 'Cardano Accounting Fundamentals (proposed)', href: '/docs/product/cardano-accounting-fundamentals'},
           // { title: 'Join the Stellar Cooperative', href: '/docs/product/stellar-cooperative'}
       ],

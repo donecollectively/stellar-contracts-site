@@ -62,11 +62,20 @@ At the application level, we will plan to leverage the patterns and infrastructu
 
 As a result, the basic Accounting APIs should be recognizably for accounting purposes.  As a sample, consider such API calls as:
 
-  * `txnAddToReceivables(txnAmount)`
-  * `txnAddExpenseCategory(mustFindExpenseCategoryUtxo("consulting, technical"), txnAmount)`
-  * `mustFindAccountsReceivableAuthorityUtxo()`
-  
-  These receivable-related calls are a small sample based on our existing technical experience in accounting systems.
+```js
+  txnAddingAccountCharter({
+    account: "consulting, technical", 
+    parentAccounts: [ "revenue", "services" ]
+    authority: mustFindAccountsAuthorityUtxo("revenue"),
+  });
+
+  txnAddingToReceivables(txnAmount, {
+      sales: mustFindChartEntryUtxo("consulting, technical")
+      client: mustFindClientAccountUtxo(clientId)
+  });
+
+```  
+  These sales-and receivable-related calls are a small sample based on our existing technical experience in accounting systems.
 
 ## How you can help
 

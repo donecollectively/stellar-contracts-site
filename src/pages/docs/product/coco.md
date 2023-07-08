@@ -27,6 +27,10 @@ Any community can have a Community Coin contract, and every such contract is com
 
 All the tokens minted by a Community Coin instance will share the same token-policy ("minting policy hash"), and can be registered on the Cardano token registry.
 
+### Enables decentralized authority
+
+The authority to mint tokens within your community can be held by a configurable number of trustees, each with particular credentials.  This mechanism can be the focus of further development, but supports essential decentralization as-is.
+
 ### Types of Tokens it can Mint
 
 The Community Coin policy doesn't force any limits on the kinds of tokens it will mint. 

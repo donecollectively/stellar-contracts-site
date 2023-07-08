@@ -43,7 +43,6 @@ Sometimes called a Thread token, a UUT has technical similarity to the mechanism
 
 {% /quick-links %}
 
-
 **UUTs link separate scripts**, enabling an implicit collaboration between them.  They can easily combine with inline Datum elements as configuration details affecting the collaboration.
 
 {% callout title="UUT's home and lifetime" %}

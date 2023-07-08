@@ -57,9 +57,9 @@ Need help with the `import contract ...` line?  [See below](#footnote-importing-
 
 ### Defined Activities 
 
-**Activities** involve spending a contract UTxO while performing specific kinds of validations that are fit to the purpose of that spending.  In short, they're ***on-chain actions done by dApps and people using them***.
+**Activities** involve spending a contract UTxO while performing specific kinds of validations that are fit to the purpose of that spending.  In short, they're ***on-chain actions done by dApps and people using them***.  Each activity normally comes with a transaction-building entry-point (`@txn`) and/or partial helper (`@Activity.partialTxn`).
 
-A ***redeemer*** data-structure identifies which activity and which details are needed to get that activity done. In Stellar contracts, each activity is marked with `@redeem`, and it is ***typically named with "ing" phrasing***, reinforcing the verb nature of activities.
+A ***redeemer*** data-structure identifies which activity and which details are needed to get that activity done. In Stellar contracts, each activity is marked with `@Activity.redeemer`, and it is ***typically named with "ing" phrasing***, reinforcing the verb nature of activities.
 
 ### Defined Datum types
 
@@ -145,29 +145,27 @@ To use the UUT pattern, use the `Capo` class instead of inheriting from `Stellar
 {% callout title="Minting a UUT for a new Delegate" %}
 
 ```js    
-import {Capo, partialTxn} from "@donecollectively/stellar-contracts";
+import {Capo, Activity} from "@donecollectively/stellar-contracts";
 
 class SomeEscrowContract extends Capo {
     // ...
 
-    @partialTxn
-    txnCreateNewInstance(tcx: StellarTxnContext) {
-        const uut = this.mkUUT(tcx, "escrowPolicy");
-
-        tcx.addOutput(
+    @Activity.partialTxn
+    txnCreatingNewInstance(tcx: StellarTxnContext) {
+        const uut = this.txnCreatingUUT(tcx, "escrowPolicy");
+        this.getEscrowPolicy().txnCreatingPolicy(tcx, uut)
     }
 }
 ```
 {% /callout %}
 
-In this example, a new "escrowPolicy" token is being created.  The
+In this example, a new "escrowPolicy" token is being created.  It's then passed into a partial helper on a related policy contract, which we can expect creates a Datum and deposits the UUT.
 
-It's possible to override the simple default minter and use it for more than just UUTs.  
+The actual name of the new token will start with its "escrowPolicy" purpose, followed by a dot, plus 16 characters of bech32-encoded uniqueness.  
 
+It's fine to override the simple default minter, and use it for more than just UUTs.  
 
 In the next example, we use the Helios API and a few helpers from Stellar to make a complete transaction.  It includes a minted UUT.
-
-
 
 ### Building an entire Txn with a delegation helper and UUT
 
@@ -179,15 +177,12 @@ async mkTxnCreateEscrow(
     policy: EscrowPolicy
     tcx = new StellarTransactionContext()
 ) {
-    const utxin = await this.mustFindValueInWallet(escrowAmount);
-    tcx.addInputs(utxIn);
-    firstUtxo = utxin[0];
-    const escrowIdUUT = this.mkUUTfromSeed(firstUtxo, "policy");
+    const escrowIdUUT = this.txnCreatingUUT(tcx, firstUtxo, "policy");
 
     const escrowPolicy = this.getEscrowPolicy(); // delegate address
 
     // 👁️ invoke a delegate, wiring them into the Capo contract via the UUT
-    escrowPolicy.txnNewEscrowInstance(tcx, escrowIdUUT, this.address);
+    escrowPolicy.txnCreatingPolicy(tcx, escrowIdUUT, this.address);
     // 👉  UUT is sent into the delegate here  ☝️
 
     //  A reference to that UUT is included in the escrow-config,
@@ -207,16 +202,10 @@ async mkTxnCreateEscrow(
 ```
 In this transaction factory, note:
 
-  * A UUT is created for the escrow instance  (`mkUUTfromSeed`)
-  * A related EscrowPolicy contract receives the UUT (`txnNewEscrowInstance`)
+  * A UUT is created for the escrow instance  (`txnCreatingUUT`)
+  * A related EscrowPolicy contract receives the UUT (`txnCreatingPolicy`)
   * A Datum (of type EscrowInstance) is included in the contract  (`escrowConfig`)
   * The EscrowInstance has a reference to the UUT and the address of the escrow policy script
-
-
-{% callout title="TODO before broad distribution" %}
-TODO: finish implementing mkUutFromSeed based on existing 'charter' pattern
-{% /callout %}
-
 
 ## Footnote: Importing Helios source
 

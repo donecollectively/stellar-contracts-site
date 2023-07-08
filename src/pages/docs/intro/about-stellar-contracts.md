@@ -33,7 +33,7 @@ A person is receiving an escrow payment.
     async mkTxnReceiveEscrowPayment(
         { escrowId }: EscrowIdDatum,
         tcx: StellarTxnContext = new StellarTxnContext()
-    ): Promise<StellarTxnContext | never> {
+    ) {
         //! includes an escrow-id token, which can only be spent
         //   ... by a person having that token
         return this.txnIncludeEscrowIdUUT(tcx). then(hasTheUUT => {
@@ -67,7 +67,7 @@ Let's dig into some of the most common patterns dApp developers can use to make 
 The transaction-building model promoted by Stellar contracts encourages the creation of small helper methods that take care of the most useful patterns that can make great functionality out of just a few moving parts
 
   * For **each primary kind of transaction people will do in your application**, use the 
-    **mkTxnXxxxYyyyy()** pattern (see `mkTxnReceiveEscrowPayment()` above)
+    **mkTxnXxxxYyyyy()** pattern (like  `mkTxnReceiveEscrowPayment()` above)
 
         These are the main kinds of function your application code will call when you need to record progress, authorize a change, or transfer funds during user interaction.
   * For **connecting scripts together**, get onboard with the creation of **unique utility tokens** 
@@ -76,19 +76,17 @@ The transaction-building model promoted by Stellar contracts encourages the crea
      
      UUTs are the scaffolding needed to connect different contract scripts together.  
      
-     See Reactive Contracts with Stellar **todo
-
   * Every "application-backend", whether browser- or server-based, must **locate the coins and tokens** that contribute to the correct semantic mechanisms for making sure their contracts do what they need to do.
 
       In Stellar Contracts, we promote easy design patterns for finding those UTxO's, and for adding them into a transaction **in ways fitting your application semantics**.  Link: more on transaction-building-blocks
 
 ### Multiple Collaborating Software Modules
 
-Just as separate on-chain scripts can combine to form effective constellations of on-chain capabilities, we can construct off-chain modules, each written in Javascript / Typescript, that do certain aspects (like the `governer` in the simple code example above) of the transaction.  
+Just as separate on-chain scripts can combine to form effective constellations of on-chain capabilities, we can construct off-chain modules, each written in Javascript / Typescript, that do certain aspects of the transaction.
 
-In that example, the **responsiblity for paying the right parties the right amounts is delegated** from the short function that gets the "receive payment" transaction built.  
+The `governer` in the example above assumes **responsiblity for paying the right parties the right amounts**, delegated from the short function that gets the "receive payment" transaction built.  
 
-It references the governer's purpose but **pushes the fine details over the boundary of separate responsibilities**.
+It references the governer's purpose and **pushes the fine details of achieving it** into separate responsibilities of the governor.
 
 These patterns enable each software module to do one primary purpose and do that thing simply and clearly.
 
@@ -105,5 +103,18 @@ At the level of "fine details", every application back-end has to actually const
 
 We encourage Activities to use active verbs, like authorizingPayment, withdrawingRoyalties, or revokingAuthorization.  By using these sorts of names, we find it creates big opportunities for contextualing details (the Redeemer data) behind these activity names.
 
-Redeemers for these examples might identify payment-id, recipients for royaltees, or the person whose authorization is being revoked.  **Activities are the entry-point for people** to use "redeemer" details in their transactions.
+Redeemers for these examples might identify payment-id, recipients for royalties, or the person whose authorization is being revoked.  **Activities are the entry-point for people** to use "redeemer" details in their transactions.
 
+## Learn more...
+
+{% quick-links %}
+
+{% quick-link title="What is a Constellation in Stellar?" icon="lightbulb" href="/docs/reference/StellarContract" description="Understand how Plutus scripts combine to form a Stellar contract" /%}
+
+{% quick-link title="Getting Started: Installing" icon="installation" href="/docs/starting/installation" description="How to start using Stellar Contracts today" /%}
+
+{% quick-link title="Learning Stellar Together" icon="presets" href="/docs/contributing/join-to-learn" description="Join our interactive learning program and learn to build richer on-chain capabilities with less code" /%}
+
+{% quick-link title="Stellar Product Cooperative" icon="theming" href="/docs/contributing/join-to-earn" description="Become a member and part owner of our cooperative venture.  Get credit for every contribution and participate in profit-sharing." /%}
+
+{% /quick-links %}

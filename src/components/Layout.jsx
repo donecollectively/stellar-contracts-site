@@ -13,7 +13,7 @@ import { ThemeSelector } from '@/components/ThemeSelector'
 
 import {navigation} from "@/index"
 
-const comingSoon = true;
+const comingSoon = false;
 
 
 function GitHubIcon(props) {
