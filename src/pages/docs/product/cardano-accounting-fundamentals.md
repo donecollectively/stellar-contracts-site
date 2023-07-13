@@ -46,9 +46,9 @@ Open standards make a bunch of things easier.  Let's do it together.
 
 Some of our member organizations will also be developing various UI's interfacing into some of these same accounting contracts, each serving particular segments in ways unique for their applications.
 
-**We'd are sponsoring an additional 5 community organizations** with consultations on accounting essentials within their dApps and organizations, with 75% of their fees paid from the Catalyst treasury.  
+<!-- **We'd are sponsoring an additional 5 community organizations** with consultations on accounting essentials within their dApps and organizations, with 75% of their fees paid from the Catalyst treasury.  
 
-We are asking those orgs to pay directly the remaining 25%, as an incentive mechanism to help ensure the organization's engagement in the process.
+We are asking those orgs to pay directly the remaining 25%, as an incentive mechanism to help ensure the organization's engagement in the process. -->
 
 ### Project Sustainability
 
