@@ -15,7 +15,7 @@ The Community Coin contract is an open-source project we created for the Cardano
 
 ### Makes a Good Start
 
-The current scope of functionality in the Community Contract is designed to be a good start - a base that other projects can fork and augment.
+The current scope of functionality in the Community Coin contract is designed to be a good start - a base that other projects can fork and augment.
 
 It's also designed to be a starting point for the project itself.  How will the Community Coin project evolve?  Get involved to find out - and influence it!
 
@@ -46,7 +46,7 @@ The on-chain contract, as well as its off-chain Javscript class, can support cre
 
 ### Paired with a Minting Policy
 
-We are building Stellar Contracts in a way that any leader contract can have a default paired minting policy with no code required.  Community Coin is no exception.
+We are building Stellar Contracts in a way that any leader contract can have a default paired minting policy with no extra code needed.  Community Coin too!
 
 ### Uses a Charter token
 

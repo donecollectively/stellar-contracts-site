@@ -93,7 +93,13 @@ Practices and conventions for shaping software, so everyone on your team can und
 
 You'll learn how to provide these capabilities as open APIs and ***create revenue-generation potential without binding other developers to your user-interfaces***.
 
-#### Week 6: Delegates and distributive transaction-building
+#### Week 6: Licensing, Auditing, Transparency, Open-Source, and creating commercial value
+
+This week connects the dots between commercialization, open-source, certification and licensing.
+
+We'll also recap key learnings from prior weeks, freshening the most important material and connecting it with this week's topics.
+
+#### Week 7: Delegates and distributive transaction-building
 
 Discover patterns for combining simple components in complementary ways, to create high-functioning software that you can extend further.  
 
@@ -103,11 +109,15 @@ Having developed strong understanding of both basic and intermediate techniques,
 
 We'll switch back and forth between concepts and concrete examples, to keep you grounded while developing big-picture intuition.
 
-#### Week 7: Design patterns for great delegates
+#### Week 8: Requirements Management and Testing
+
+In addition to a recap of key learnings about delegates, we'll focus this week on practices around requirements management and testing.  Building things right is no good if you aren't building the right thing.  We'll get a good look at both.
+
+#### Week 9: Design patterns for great delegates
 
 With delegates, there's not just One Right Way.  You'll learn about variations on the theme, how they might apply in various situations, and how to distinguish between those techniques and their fitness for your goals.
 
-#### Week 8: Enabling evolutionary capacity for your contracts
+#### Week 10: Enabling evolutionary capacity for your contracts
 
 Immutable or upgradable?  Why not both?  Practical considerations for continuity, evolution and escape-hatches.
 

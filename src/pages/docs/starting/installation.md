@@ -43,8 +43,11 @@ Helios has a plugin for VS Code you can use to see syntax highlighting and error
 
 ### Install
 
-Install with `pnpm add @donecollectively/stellar-contracts`, or clone [our github repo](https://github.com/donecollectively/stellar-contracts) and use `pnpm link` from your project repo.
+Intrepid? clone [our github repo](https://github.com/donecollectively/stellar-contracts).
 
+Hang tight - we're working through a release-management cycle and a testnet phase before general-availability.  
+
+Soon, you'll simply install using `pnpm add @donecollectively/stellar-contracts`
 
 #### Start with a working boilerplate
 
